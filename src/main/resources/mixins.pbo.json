@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.glyceryl.optimize.mixin",
+  "refmap": "mixins.pbo.refmap.json",
+  "compatibilityLevel": "JAVA_16",
+  "mixins": [
+    "MixinPiglinAi",
+    "PiglinMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
