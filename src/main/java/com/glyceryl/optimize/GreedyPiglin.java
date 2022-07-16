@@ -1,6 +1,6 @@
 package com.glyceryl.optimize;
 
-import com.glyceryl.optimize.config.ClientConfig;
+import com.glyceryl.optimize.config.CommonConfig;
 import com.glyceryl.optimize.event.PiglinModify;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.monster.piglin.PiglinAi;
@@ -18,11 +18,11 @@ public class GreedyPiglin {
     public static final String MOD_ID = "greedy_piglin";
 
     public GreedyPiglin() {
-        Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(ClientConfig.BARTERING_ITEM.get()));
+        Item item = ForgeRegistries.ITEMS.getValue(new ResourceLocation(CommonConfig.BARTERING_ITEM.get()));
         if (item != null) {
             PiglinAi.BARTERING_ITEM = !item.getDefaultInstance().isEmpty() ? item : Items.GOLD_INGOT;
         }
-        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, ClientConfig.SPEC);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, CommonConfig.SPEC);
         MinecraftForge.EVENT_BUS.register(new PiglinModify());
         MinecraftForge.EVENT_BUS.register(this);
     }

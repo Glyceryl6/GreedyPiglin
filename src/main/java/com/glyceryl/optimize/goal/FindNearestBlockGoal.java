@@ -1,7 +1,8 @@
 package com.glyceryl.optimize.goal;
 
-import com.glyceryl.optimize.config.ClientConfig;
+import com.glyceryl.optimize.config.CommonConfig;
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.MoveToBlockGoal;
@@ -12,6 +13,7 @@ import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -20,8 +22,8 @@ public class FindNearestBlockGoal extends MoveToBlockGoal {
 
     public FindNearestBlockGoal(PathfinderMob mob) {
         super(mob, mob.isBaby() ? 0.8F : 0.5F,
-                ClientConfig.HORIZONTAL_SEARCH_RANGE.get(),
-                ClientConfig.VERTICAL_SEARCH_RANGE.get());
+                CommonConfig.HORIZONTAL_SEARCH_RANGE.get(),
+                CommonConfig.VERTICAL_SEARCH_RANGE.get());
     }
 
     public boolean canContinueToUse() {
@@ -41,7 +43,17 @@ public class FindNearestBlockGoal extends MoveToBlockGoal {
         if (blockState.hasBlockEntity() && hasGoldBlockNeighbor) {
             BlockEntity blockEntity = level.getBlockEntity(pos);
             if (blockEntity instanceof Container container) {
-                return this.hasPiglinLoved(container);
+                int itemCount = 0;
+                for (String item : CommonConfig.CAN_ATTRACT_PIGLIN.get()) {
+                    Item piglinLoved = ForgeRegistries.ITEMS.getValue(new ResourceLocation(item));
+                    if (piglinLoved != null) {
+                        if (container.countItem(piglinLoved) > 0) {
+                            itemCount = container.countItem(piglinLoved);
+                            break;
+                        }
+                    }
+                }
+                return itemCount > 0;
             } else {
                 return false;
             }

@@ -1,6 +1,6 @@
 package com.glyceryl.optimize.mixin;
 
-import com.glyceryl.optimize.config.ClientConfig;
+import com.glyceryl.optimize.config.CommonConfig;
 import net.minecraft.world.entity.monster.piglin.PiglinAi;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.Constant;
@@ -11,7 +11,7 @@ public class MixinPiglinAi {
 
     @ModifyConstant(method = "admireGoldItem", constant = @Constant(longValue = 120L))
     private static long admireGoldItem(long constant) {
-        return ClientConfig.ADMIRE_DURATION.get();
+        return CommonConfig.ADMIRE_DURATION.get();
     }
 
 }
