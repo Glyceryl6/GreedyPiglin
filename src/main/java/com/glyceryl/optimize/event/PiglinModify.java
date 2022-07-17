@@ -15,6 +15,7 @@ import net.minecraft.world.entity.monster.piglin.PiglinAi;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.Hopper;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -39,10 +40,14 @@ public class PiglinModify {
                                         Item piglinLoved = ForgeRegistries.ITEMS.getValue(new ResourceLocation(item));
                                         if (piglinLoved != null && !piglinLoved.getDefaultInstance().isEmpty() && container.countItem(piglinLoved) > 0) {
                                             ItemStack itemStack = piglinLoved.getDefaultInstance().split(1);
-                                            ItemEntity itemEntity = new ItemEntity(piglin.level, pos1.getX(), pos1.above().getY(), pos1.getZ(), itemStack);
-                                            itemEntity.setNeverPickUp();
-                                            itemEntity.lifespan = 15;
-                                            piglin.level.addFreshEntity(itemEntity);
+                                            boolean noStuckInHopper = !(piglin.level.getBlockEntity(pos1) instanceof Hopper);
+                                            boolean noHopperBelow = !(piglin.level.getBlockEntity(pos1.below()) instanceof Hopper);
+                                            if (noStuckInHopper && noHopperBelow) {
+                                                ItemEntity itemEntity = new ItemEntity(piglin.level, pos1.getX(), pos1.above().getY(), pos1.getZ(), itemStack);
+                                                itemEntity.setNeverPickUp();
+                                                itemEntity.lifespan = 15;
+                                                piglin.level.addFreshEntity(itemEntity);
+                                            }
                                             PiglinAi.holdInOffhand(piglin, itemStack);
                                             PiglinAi.putInInventory(piglin, itemStack);
                                             piglin.inventory.removeAllItems();
