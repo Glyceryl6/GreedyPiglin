@@ -6,9 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.MoveToBlockGoal;
-import net.minecraft.world.entity.monster.piglin.PiglinAi;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -60,33 +58,6 @@ public class FindNearestBlockGoal extends MoveToBlockGoal {
         } else {
             return false;
         }
-    }
-
-    public boolean hasPiglinLoved(Container container) {
-        Item item = PiglinAi.BARTERING_ITEM;
-        return container.countItem(item) > 0 ||
-                container.countItem(Items.BELL) > 0 ||
-                container.countItem(Items.CLOCK) > 0 ||
-                container.countItem(Items.GOLD_BLOCK) > 0 ||
-                container.countItem(Items.GOLD_INGOT) > 0 ||
-                container.countItem(Items.GOLDEN_APPLE) > 0 ||
-                container.countItem(Items.GOLDEN_CARROT) > 0 ||
-                container.countItem(Items.GILDED_BLACKSTONE) > 0 ||
-                container.countItem(Items.GOLDEN_HORSE_ARMOR) > 0 ||
-                container.countItem(Items.GLISTERING_MELON_SLICE) > 0 ||
-                container.countItem(Items.GOLDEN_HELMET) > 0 ||
-                container.countItem(Items.GOLDEN_CHESTPLATE) > 0 ||
-                container.countItem(Items.GOLDEN_LEGGINGS) > 0 ||
-                container.countItem(Items.GOLDEN_BOOTS) > 0 ||
-                container.countItem(Items.GOLDEN_SWORD) > 0 ||
-                container.countItem(Items.GOLDEN_PICKAXE) > 0 ||
-                container.countItem(Items.GOLDEN_SHOVEL) > 0 ||
-                container.countItem(Items.GOLDEN_AXE) > 0 ||
-                container.countItem(Items.GOLDEN_HOE) > 0 ||
-                container.countItem(Items.RAW_GOLD) > 0 ||
-                container.countItem(Items.RAW_GOLD_BLOCK) > 0 ||
-                container.countItem(Items.ENCHANTED_GOLDEN_APPLE) > 0 ||
-                container.countItem(Items.LIGHT_WEIGHTED_PRESSURE_PLATE) > 0;
     }
 
 }
