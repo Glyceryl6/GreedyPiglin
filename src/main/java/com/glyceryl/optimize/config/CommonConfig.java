@@ -42,8 +42,7 @@ public class CommonConfig {
                                 "minecraft:golden_sword", "minecraft:golden_pickaxe",
                                 "minecraft:golden_shovel", "minecraft:golden_axe",
                                 "minecraft:golden_hoe", "minecraft:raw_gold",
-                                "minecraft:raw_gold_block", "minecraft:porkchop",
-                                "minecraft:cooked_porkchop"), (obj) -> true);
+                                "minecraft:raw_gold_block"), (obj) -> true);
         BUILDER.pop();
         SPEC = BUILDER.build();
     }
